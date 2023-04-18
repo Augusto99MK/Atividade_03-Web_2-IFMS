@@ -1,0 +1,20 @@
+<?php
+try {
+    $conexao = new PDO("mysql:host=localhost; dbname=web2", "root", "Carlos11425@");
+} catch (PDOException $e) {
+    die("Ocorreu um erro inesperado " . $e->getMessage());
+}
+
+$idCurso = $_POST['id_curso'];
+$nome = $_POST['nome'];
+$nota = $_POST['nota'];
+
+try {
+    $sql = "update curso set nomeCurso='$nome', notaCurso='$nota' where idCurso=" . $idCurso;
+    $conexao->exec($sql);
+    echo "Editado com sucesso !!!";
+} catch (PDOException $e) {
+    die("Ocorreu um erro " . $e->getMessage());
+}
+
+header('Location: ../../view/curso/buscarCurso.php');
