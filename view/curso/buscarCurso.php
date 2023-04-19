@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <title>Busca de Curso</title>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <link href="<?php echo $path; ?>/arquivos/css/bootstrap.min.css" rel="stylesheet">
     <script src="<?php echo $path; ?>/arquivos/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="<?php echo $path; ?>/arquivos/js/busca.cep.js"></script>
@@ -57,40 +56,47 @@
                     die('aconteceu um erro: ' . $e->getMessage());
                 }
                 try {
-                    $sql = "select * from curso";
+                    $sql = "SELECT curso.*, area.nomeArera, campus.nomeCampus
+                    FROM curso
+                    INNER JOIN area ON curso.idArea = area.idArea
+                    INNER JOIN campus ON curso.idCampus = campus.idCampus";
                     $resultado = $conexao->query($sql);
                     if ($resultado->rowCount() > 0) {
         ?>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Resultado da busca de cursos:</h3>
-                <table class="table border-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome Curso</th>
-                            <th scope="col">Nota Curso</th>
-                            <th scope="col">#</th>
-                            <th scope="col">#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Resultado da busca de cursos:</h3>
+                                <table class="table border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nome Curso</th>
+                                            <th scope="col">Nota Curso</th>
+                                            <th scope="col">Nome Area</th>
+                                            <th scope="col">Nome Campus</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
                                         while ($linha = $resultado->fetch()) {
                                             echo "<tr>";
                                             echo "<td>" . $linha['idCurso'] . "</td>";
                                             echo "<td>" . $linha['nomeCurso'] . "</td>";
                                             echo "<td>" . $linha['notaCurso'] . "</td>";
+                                            echo "<td>" . $linha['nomeArera'] . "</td>";
+                                            echo "<td>" . $linha['nomeCampus'] . "</td>";
                                             echo "<td><a href=\"../../repositorio/curso/removerCurso.php?id_Curso=" . $linha['idCurso'] . "\" class=\"btn btn-danger\">Remover</a></td>";
                                             echo "<td><a href=\"../curso/editarCurso.php?id_Curso=" . $linha['idCurso'] . "\" class=\"btn btn-secondary\">Editar</a></td>";
                                             echo "</tr>";
                                         }
                                         ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <?php
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php
                     } else {
                         echo "<div class='row'><div class='col-md-12'><p>Nenhum curso encontrado.</p></div></div>";
                     }
@@ -108,21 +114,21 @@
                     $resultado = $conexao->query($sql);
                     if ($resultado->rowCount() > 0) {
                     ?>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Resultado da busca de campus:</h3>
-                <table class="table border-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome Campus</th>
-                            <th scope="col">CEP</th>
-                            <th scope="col">#</th>
-                            <th scope="col">#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Resultado da busca de campus:</h3>
+                                <table class="table border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nome Campus</th>
+                                            <th scope="col">CEP</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
                                         while ($linha = $resultado->fetch()) {
                                             echo "<tr>";
                                             echo "<td>" . $linha['idCampus'] . "</td>";
@@ -133,11 +139,11 @@
                                             echo "</tr>";
                                         }
                                         ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <?php
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php
                     } else {
                         echo "<div class='row'><div class='col-md-12'><p>Nenhum campus encontrado.</p></div></div>";
                     }
@@ -155,20 +161,20 @@
                     $resultado = $conexao->query($sql);
                     if ($resultado->rowCount() > 0) {
                     ?>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Resultado da busca de area:</h3>
-                <table class="table border-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome Area</th>
-                            <th scope="col">#</th>
-                            <th scope="col">#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Resultado da busca de area:</h3>
+                                <table class="table border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nome Area</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
                                         while ($linha = $resultado->fetch()) {
                                             echo "<tr>";
                                             echo "<td>" . $linha['idArea'] . "</td>";
@@ -178,10 +184,10 @@
                                             echo "</tr>";
                                         }
                                         ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
         <?php
                     } else {
                         echo "<div class='row'><div class='col-md-12'><p>Nenhuma area encontrada.</p></div></div>";
