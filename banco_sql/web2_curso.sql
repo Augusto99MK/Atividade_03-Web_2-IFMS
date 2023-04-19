@@ -33,7 +33,7 @@ CREATE TABLE `curso` (
   KEY `FKc8rb1iy4jtpdgvfu00murb5au` (`idArea`),
   CONSTRAINT `FKc8rb1iy4jtpdgvfu00murb5au` FOREIGN KEY (`idArea`) REFERENCES `area` (`idArea`),
   CONSTRAINT `FKc9rb2iy5jtpdgvfu01murb6au` FOREIGN KEY (`idCampus`) REFERENCES `campus` (`idCampus`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (5,'TADS',10,NULL,NULL);
+INSERT INTO `curso` VALUES (5,'TADS',10,NULL,NULL),(6,'Curso TADS',10,NULL,NULL),(7,'Carlos Augusto Moreira',5,4,2);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 16:42:51
+-- Dump completed on 2023-04-18 22:31:53
